@@ -38,4 +38,5 @@
         <button type="submit" wire:click.prevent="store()" class="btn btn-success">Register</button>
     </div>
 </form>
+<button wire:click='login()'>Lon In</button>
 </div>
