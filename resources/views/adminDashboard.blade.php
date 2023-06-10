@@ -9,6 +9,7 @@
 </head>
     <body>
         @livewire('admindashboardinfo')
+        @livewire('additem')
 
         @livewireScripts
     </body>

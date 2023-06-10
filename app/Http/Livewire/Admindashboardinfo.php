@@ -25,6 +25,5 @@ class Admindashboardinfo extends Component
     public function logout(){
         session()->forget(['email', 'admin']);
         return redirect('/');
-
     }
 }

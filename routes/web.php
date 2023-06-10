@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // $a = DB::select('SELECT *
+    // FROM items, item_groups
+    // WHERE items.item_group_id = item_groups.id
+    // AND item_groups.group = ?
+    // ', ['vegetable']);
+
+    // dd($a);
+
     return view('login');
 });
 
