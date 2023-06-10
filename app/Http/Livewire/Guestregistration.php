@@ -38,4 +38,8 @@ class Guestregistration extends Component
             session()->flash('message', 'Post Created Successfully.');
         }
     }
+
+    public function login(){
+        return redirect('/');
+    }
 }
