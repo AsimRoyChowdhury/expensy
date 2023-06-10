@@ -1,4 +1,5 @@
 <div>
+    <button wire:click='logout()'>Logout</button> 
     <h1>Guest Information</h1>
 
     <p><strong>Hello </strong> {{ $user->username }}</p>

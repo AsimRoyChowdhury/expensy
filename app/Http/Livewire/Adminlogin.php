@@ -44,7 +44,7 @@ class Adminlogin extends Component
             }
         }
         else{
-            $this->error = 'email is not registered';
+            $this->error = 'This is not a Admin ID';
         }
     }
 }

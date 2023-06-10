@@ -1,7 +1,8 @@
 <div>
+    <button wire:click='logout()'>Logout</button> 
         <ul>
             @foreach($alert as $msg)
-                <li>{{ $msg }}</li>
+                <p>{{ $msg }}</p>
             @endforeach
         </ul>
 <form>
@@ -25,4 +26,5 @@
         <button type="submit" wire:click.prevent='update()'>Save</button>
     </div>
 </form>
+<button wire:click='profile'>Return to profile</button> 
 </div>

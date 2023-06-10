@@ -19,6 +19,12 @@ class GuestDashboardInfo extends Component
         return view('livewire.guest-dashboard-info');
     }
 
+    public function logout(){
+        session()->forget(['email', 'admin']);
+        return redirect('/');
+
+    }
+    
     public function edit(){
         return redirect('/edituser');
     }

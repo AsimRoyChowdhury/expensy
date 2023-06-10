@@ -47,4 +47,8 @@ class Guestlogin extends Component
             $this->error = 'email is not registered';
         }
     }
+
+    public function register(){
+        return redirect('/register');
+    }
 }

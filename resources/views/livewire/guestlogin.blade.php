@@ -36,5 +36,6 @@
         <button type="submit" wire:click.prevent='login()'>Login</button>
     </div>
 </form>
+<button wire:click='register'>Sign up</button>
 </div>
 @endif
