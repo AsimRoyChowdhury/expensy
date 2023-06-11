@@ -9,7 +9,7 @@
 </head>
     <body>
         @livewire('guest-dashboard-info')
-        @livewire('expensditure')
+        @livewire('expenditureinfo')
 
         @livewireScripts
     </body>

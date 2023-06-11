@@ -130,17 +130,22 @@
     <form>
         
         @if($msg==5)
-            Do you want to delete this item :
-            <p>{{$del}}</p>
+            Do you want to delete this item : 
             <div>
                 @if(is_string($del))
-                    <button wire:click="Yes('{{$del}}')">Yes</button>
+                    <button wire:click.prevent="Yes('{{$del}}')">Yes</button>
                 @else
-                    <button wire:click="Yes({{$del}})">Yes</button>
+                    <button wire:click.prevent="Yes({{$del}})">Yes</button>
                 @endif
                 <button wire:click="No()">No</button>
             </div>
         @endif
     </form>
+
+    <div>
+        @if($msg==6)
+            Item Successfully Deleted
+        @endif
+    </div>
 
 </div>

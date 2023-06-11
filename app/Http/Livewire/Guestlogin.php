@@ -35,7 +35,8 @@ class Guestlogin extends Component
                 session(
                     [
                         'admin' => 2,
-                        'email'=> $this->email
+                        'email'=> $this->email,
+                        'user_id'=> $userinfo->id
                     ]);
                 return redirect('/guestinfo');
             } 

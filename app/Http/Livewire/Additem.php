@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Item;
 use App\Models\ItemGroup;
+use App\Models\Expenditure;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -112,18 +113,24 @@ class Additem extends Component
 
     public function Yes($del1){
         if(is_string($del1)){
+            $itemid = DB::table('items')->where('item_name', $del1)->pluck('id');
             DB::table('items')->where('item_name', $del1)->delete();
+            if($itemid!=null){
+                DB::table('expenditures')->where('item_id', $itemid)->delete();
+            }
             // Item::find($id)->delete();
         }
         else{
             ItemGroup::find($del1)->delete();
             DB::table('items')->where('item_group_id', $del1)->delete();
+            DB::table('expenditures')->where('item_group_id', $del1)->delete();
         }
         $this->del = null;
+        $this->msg = 6; 
     }
 
     public function No(){
         $this->view = 0;
-        $this->msg='';
+        $this->msg=0;
     }
 }

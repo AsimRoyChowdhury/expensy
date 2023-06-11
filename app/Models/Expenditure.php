@@ -9,7 +9,7 @@ class Expenditure extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'item_id', 'Quantity', 'cost'
+        'user_id', 'item_group_id', 'item_id', 'Quantity', 'cost'
     ];
 
     public function guestinfo(){
@@ -18,5 +18,9 @@ class Expenditure extends Model
 
     public function item(){
         return $this->belongsTo(Item::class);
+    }
+
+    public function item_group(){
+        return $this->belongsTo(ItemGroup::class);
     }
 }

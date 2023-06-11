@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('expenditures', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id'); // foreign key references guestinfos
-            $table->integer('item_id'); // foreign key references admininfos
+            $table->integer('item_id'); // foreign key references items
+            $table->integer('item_group_id'); //foreign key references item_groups
             $table->integer('Quantity');
             $table->integer('cost');
             $table->timestamps();
