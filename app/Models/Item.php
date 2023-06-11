@@ -15,4 +15,8 @@ class Item extends Model
     public function item_group(){
         return $this->belongsTo(ItemGroup::class);
     }
+
+    public function expenditures(){
+        return $this->hasMany(Expenditure::class);
+    }
 }

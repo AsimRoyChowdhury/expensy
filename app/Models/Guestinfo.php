@@ -11,4 +11,8 @@ class Guestinfo extends Model
     protected $fillable = [
         'username', 'email', 'password' 
     ];
+
+    public function expenditures(){
+        return $this->hasMany(Expenditure::class);
+    }
 }
