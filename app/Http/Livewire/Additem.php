@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class Additem extends Component
 {
-    public $view, $itemName, $itemGroup, $groups, $items, $msg;
+    public $view, $itemName, $itemGroup, $groups, $items=[], $msg, $AddGroupName;
     public function render()
     {
         return view('livewire.additem');
@@ -18,48 +18,112 @@ class Additem extends Component
 
     //showing the additem div
     public function addItem(){
+        $this->msg = '';
         $this->groups = ItemGroup::all();
-        $this->view = 1;
+        $this->view = 'AddItem';
     }
 
+    public function addGroup(){
+        $this->msg = '';
+        $this->view = 'AddGroup';
+    }
+
+
+    private $temp;
 
     //saving the items to the database
     public function saveItem(){
         $this->validate([
             'itemName' => ['required'],
+            'itemGroup' => ['required']
         ]);
-
-        if(Item::where('item_name', $this->itemName)->where('item_group_id', $this->itemGroup)->first()){
-            $this->msg = 1;
+        
+        $this->temp = strtolower($this->itemName);
+        if(Item::where('item_name', $this->temp)->where('item_group_id', $this->itemGroup)->first()){
+            $this->msg = 1; //Warning: An item with this name is already added
         }
         else{
             $info = [
-                'item_name' => $this->itemName,
+                'item_name' => $this->temp,
                 'item_group_id' => $this->itemGroup 
             ];
             
             Item::create($info);
             $this->view = 0;
-            $this->msg = 2;
+            $this->msg = 2; //item succesfully added
+            
+        }
+        
+    }
+
+
+    //Saving the Groups to the database
+    public function saveGroup(){
+        $this->temp = strtolower($this->AddGroupName);
+        if(ItemGroup::where('group', (strtolower($this->temp)))->first()){
+            $this->msg = 3; //This Group is already added 
+        }
+        else{
+            $info = [
+                'group' => $this->temp,
+            ];
+            
+            ItemGroup::create($info);
+            $this->view = 0;
+            $this->msg = 4; //Group Successfully added 
 
         }
-
     }
+    
 
-    //showing all the items along with their groups
+    public $selectItemGroup;
+
+
+    //showing items of specific group in database
     public function showItem(){
-        $this->msg=0;
+        $this->msg = '';
+        $this->view = 'ShowItem';
         $this->groups = ItemGroup::all();
-
-        $this->items = DB::table('items')
-            ->join('item_groups', 'items.item_group_id', '=', 'item_groups.id')
-            ->get();
-
-
-        // $this->groups = ItemGroup::all();
-        // $this->items = Item::all();
-        $this->view = 2;
-
     }
 
+    public function show(){
+        
+        $this->items = DB::select('SELECT *
+            FROM items, item_groups
+            WHERE items.item_group_id = item_groups.id
+            AND item_groups.id = ?
+            ', [$this->selectItemGroup]);
+    }
+    
+    public function deleteItem($view){
+        $this->msg = '';
+        $this->groups = ItemGroup::all();
+        $this->view = $view;
+    }
+
+
+    public $del;
+    public function destroy($del1){
+        $this->del = $del1;
+        $this->msg = 5; //Yes or No dialog
+        
+    }
+
+
+    public function Yes($del1){
+        if(is_string($del1)){
+            DB::table('items')->where('item_name', $del1)->delete();
+            // Item::find($id)->delete();
+        }
+        else{
+            ItemGroup::find($del1)->delete();
+            DB::table('items')->where('item_group_id', $del1)->delete();
+        }
+        $this->del = null;
+    }
+
+    public function No(){
+        $this->view = 0;
+        $this->msg='';
+    }
 }
