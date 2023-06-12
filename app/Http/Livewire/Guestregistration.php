@@ -7,7 +7,7 @@ use App\Models\Guestinfo;
 
 class Guestregistration extends Component
 {
-    public $username, $email, $password, $error;
+    public $username, $email, $password, $error, $confirmPassword;
 
     public function render()
     {
@@ -17,29 +17,33 @@ class Guestregistration extends Component
 
     public function store()
     {
-        $this->validate([
-            'username' => ['required'],
-            'email' => ['required', 'email', 'unique:guestinfos'],
-            'password' => ['required'],
-        ]);
-
-        if(Guestinfo::where('email', $this->email)->exists()){
-            $this->error = 'This email already exists';
+        if($this->password != $this->confirmPassword){
+            $this->error = 'Please type in same Passwords to confirm';
         }
         else{
-            $info = [
-                'username' => $this->username,
-                'email' => $this->email,
-                'password' => bcrypt($this->password)
-            ];
-    
-            Guestinfo::create($info);
+            $this->validate([
+                'username' => ['required'],
+                'email' => ['required', 'email', 'unique:guestinfos'],
+                'password' => ['required', 'min:8'],
+            ]);
 
-            session()->flash('message', 'Post Created Successfully.');
+            if(Guestinfo::where('email', $this->email)->exists()){
+                $this->error = 'This email already exists';
+            }
+            else{
+                $info = [
+                    'username' => $this->username,
+                    'email' => $this->email,
+                    'password' => bcrypt($this->password)
+                ];
+        
+                Guestinfo::create($info);
+                $this->error = 'Success';
+
+                return redirect('/');
+            }
         }
     }
 
-    public function login(){
-        return redirect('/');
-    }
+
 }

@@ -17,7 +17,7 @@ class Adminlogin extends Component
 
     public function guest(){
         session(['guest'=> '1']);
-        return redirect('/');
+        return redirect('/login');
     }
 
     public function login()

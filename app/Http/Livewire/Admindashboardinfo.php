@@ -13,7 +13,9 @@ class Admindashboardinfo extends Component
    
     public function render()
     {
-        
+        if(session('email')==null){
+            return redirect('/');
+        }   
         $this->user = Admininfo::where('admin_id', session('email'))->first();
         return view('livewire.admindashboardinfo');
     }

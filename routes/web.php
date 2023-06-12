@@ -16,14 +16,10 @@ use Illuminate\Support\Facades\DB;
 */
 
 Route::get('/', function () {
-    // $a = DB::select('SELECT *
-    // FROM items, item_groups
-    // WHERE items.item_group_id = item_groups.id
-    // AND item_groups.group = ?
-    // ', ['vegetable']);
+    return view('home');
+});
 
-    // dd($a);
-
+Route::get('/login', function () {
     return view('login');
 });
 

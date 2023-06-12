@@ -4,16 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite('resources/css/app.css')
 
     @livewireStyles
 </head>
 
-<body class="bg-yellow-100">
-    <div class="flex flex-col justify-center h-screen">
-        @livewire('guestregistration')
-    </div>
-    <div>
-    </div>
+<body class="bg-red-100">
+    @livewire('guestregistration')
     @livewireScripts
 </body>
 

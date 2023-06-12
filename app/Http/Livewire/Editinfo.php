@@ -35,6 +35,7 @@ class Editinfo extends Component
                         'email' => $this->email
                     ]);
                     $this->alert[] ='Email succesfully updated';
+                    session(['email'=> $this->email]);
                 }
             }
             if($this->username != null){
@@ -62,6 +63,7 @@ class Editinfo extends Component
                         'email' => $this->email
                     ]);
                     $this->alert[] ='Email succesfully updated';
+                    session(['email'=> $this->email]);
                 }
             }
             if($this->username != null){

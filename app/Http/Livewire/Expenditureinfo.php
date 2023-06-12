@@ -51,6 +51,7 @@ class Expenditureinfo extends Component
 
     //changing view for adding the expense
     public function addExpense(){
+        $this->view = '';
         $this->msg = '';
         $this->groups = ItemGroup::all();
         $this->view = 'AddExpense';
@@ -85,6 +86,7 @@ class Expenditureinfo extends Component
             Expenditure::create($info);
             $this->view = 0;
             $this->msg = 1; //item succesfully added
+            return redirect('/guestinfo');
             
         }
 

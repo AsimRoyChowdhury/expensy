@@ -13,6 +13,9 @@ class GuestDashboardInfo extends Component
    
     public function render()
     {
+        if(session('email')==null){
+            return redirect('/');
+        }
         // $this->email_retrive();
         $this->user = Guestinfo::where('email', session('email'))->first();
         return view('livewire.guest-dashboard-info');
